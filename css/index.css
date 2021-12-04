@@ -2252,7 +2252,6 @@ blockquote footer cite:before {
   max-width: 1200px;
   width: 100%;
 }
-
 @media screen and (max-width: 900px) {
   .layout {
     -webkit-box-orient: vertical;
@@ -4584,6 +4583,7 @@ blockquote footer cite:before {
 #sidebar #sidebar-menus .menus_items .menus_item_child {
   margin: 0;
   list-style: none;
+  display: none;
 }
 #vcomment {
   font-size: 1.1em;
