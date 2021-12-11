@@ -15,6 +15,25 @@
     </entry>
     
     
+    
+    <entry>
+      <title>win10底部任务栏无响应怎么办？</title>
+      <link href="/2021/06/11/win10%E5%BA%95%E9%83%A8%E4%BB%BB%E5%8A%A1%E6%A0%8F%E6%97%A0%E5%93%8D%E5%BA%94%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/"/>
+      <url>/2021/06/11/win10%E5%BA%95%E9%83%A8%E4%BB%BB%E5%8A%A1%E6%A0%8F%E6%97%A0%E5%93%8D%E5%BA%94%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<h3 id="win10底部任务栏无反应（鼠标一直转圈，系统假死）"><a href="#win10底部任务栏无反应（鼠标一直转圈，系统假死）" class="headerlink" title="win10底部任务栏无反应（鼠标一直转圈，系统假死）"></a>win10底部任务栏无反应（鼠标一直转圈，系统假死）</h3><blockquote><p>方法一</p><p>1、按下【ctrl+shfit+esc】打开任务管理器；</p><p>2、点击【文件】-【运行新任务】；</p><p>3、勾选【以系统管理权限创建此任务】，在框中输入：cmd ，点击确定 ；</p><p>在CMD里输入 shutdown -r -t 5（5秒后重启计算机），回车。等待重启电脑。</p></blockquote><blockquote><p>方法二</p><p>1、按下“ctrl+alt+delete”键，打开 任务管理器 ；</p><p>2、在“详细信息”中找到“explorer.exe”，选择结束任务；</p><p>3、在任务管理器中创建新任务，输入“explorer.exe”。</p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> win10 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
