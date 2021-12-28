@@ -4,9 +4,34 @@
   
     
     <entry>
+      <title>Java集合</title>
+      <link href="/2021/08/28/Java%E9%9B%86%E5%90%88/"/>
+      <url>/2021/08/28/Java%E9%9B%86%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL290aGVyLzE0MDgxODMvMjAxOTExLzE0MDgxODMtMjAxOTExMTkxODQxNDk1NTktMTU3MTU5NTY2OC5qcGc?x-oss-process=image/format,png" alt="java集合"></p><h3 id="框架底层数据结构"><a href="#框架底层数据结构" class="headerlink" title="框架底层数据结构"></a>框架底层数据结构</h3><ol><li>List</li></ol><ul><li><p>  ArrayList：数组</p></li><li><p>  LinkedList：双向循环链表</p></li><li><p>  Vector：数组</p></li></ul><ol start="2"><li>Set</li></ol><ul><li><p>  HashSet：基于 HashMap 实现的，底层采用 HashMap 来保存元素</p></li><li><p>  LinkedHashSet：LinkedHashSet 继承与 HashSet，并且其内部是通过 LinkedHashMap 来实现的。</p></li><li><p>  TreeSet：红黑树（自平衡的排序二叉树）</p></li></ul><ol start="3"><li>Map</li></ol><ul><li><p>  HashMap：JDK1.8之前：哈希表（数组+单向链表）；JDK1.8之后：哈希表（数组+单向链表+红黑树），当链表长度超过阈值（8）时，链表将转换为红黑树。</p></li><li><p>  LinkedHashMap：JDK1.8之前：哈希表（数组+双向链表）；JDK1.8之后：哈希表（数组+双向链表+红黑树），当链表长度超过阈值（8）时，链表将转换为红黑树。</p></li><li><p>  HashTable：哈希表</p></li><li><p>  TreeMap：红黑树</p></li></ul><h3 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h3><ul><li><p>  数据结构实现：ArrayList 是动态数组的数据结构实现，而 LinkedList 是双向链表的数据结构实现。</p></li><li><p>  随机访问效率：ArrayList 比 LinkedList 在随机访问的时候效率要高，因为 LinkedList 是线性的数据存储方式，所以需要移动指针从前往后依次查找。</p></li><li><p>  增加和删除效率：在非首尾的增加和删除操作，LinkedList 要比 ArrayList 效率要高，因为 ArrayList 增删操作要影响数组内的其他数据的下标。</p></li><li><p>  内存空间占用：LinkedList 比 ArrayList 更占内存，因为 LinkedList 的节点除了存储数据，还存储了两个引用，一个指向前一个元素，一个指向后一个元素。</p></li><li><p>  线程安全：ArrayList 和 LinkedList 都是不同步的，也就是不保证线程安全；</p></li></ul><p>综合来说，在需要频繁读取集合中的元素时，更推荐使用 ArrayList，而在插入和删除操作较多时，更推荐使用 LinkedList。</p><blockquote><p>Tips:</p><ul><li><p>  ArrayList是线程不安全的</p></li><li><p> 可以保存null元素</p></li><li><p> indexOf(Object o)方法的作用是从头开始查找与指定元素相等的元素</p></li><li><p> 实现了RandomAccess接口，支持随机访问，通过get(i)即可获得相应内存中存放的值</p></li></ul></blockquote><h3 id="ArrayList的线程不安全"><a href="#ArrayList的线程不安全" class="headerlink" title="ArrayList的线程不安全"></a>ArrayList的线程不安全</h3><p><a href="https://blog.csdn.net/u012859681/article/details/78206494?ops_request_misc=&request_id=&biz_id=102&utm_term=ArrayList%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-4-78206494.pc_search_em_sort&spm=1018.2226.3001.4187">详细解析</a></p><h3 id="HashSet的实现原理"><a href="#HashSet的实现原理" class="headerlink" title="HashSet的实现原理"></a>HashSet的实现原理</h3><p>HashSet 是基于 HashMap 实现的，HashSet的值存放于HashMap的key上，HashMap的value统一为PRESENT，因此 HashSet 的实现比较简单，相关 HashSet 的操作，基本上都是直接调用底层 HashMap 的相关方法来完成，HashSet 不允许重复的值。</p><h3 id="HashMap在JDK1-7和1-8中的底层实现的不同"><a href="#HashMap在JDK1-7和1-8中的底层实现的不同" class="headerlink" title="HashMap在JDK1.7和1.8中的底层实现的不同"></a>HashMap在JDK1.7和1.8中的底层实现的不同</h3><p>JDK1.8之前采用的是拉链法。拉链法：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。</p><p><img src="https://img-blog.csdnimg.cn/2019121422243983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70"></p><p>jdk1.8在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。</p><p><img src="https://img-blog.csdnimg.cn/20191214222452844.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70"></p><p>优化：</p><ol><li><p>resize 扩容优化</p></li><li><p>引入了红黑树，目的是避免单条链表过长而影响查询效率，红黑树算法请参考</p></li><li><p>解决了多线程死循环问题，但仍是非线程安全的，多线程时可能会造成数据丢失问题。</p></li></ol><h3 id="HashMap如何解决哈希冲突"><a href="#HashMap如何解决哈希冲突" class="headerlink" title="HashMap如何解决哈希冲突"></a>HashMap如何解决哈希冲突</h3><p><strong>哈希冲突</strong>：当两个不同的输入值，根据同一散列函数计算出相同的散列值的现象，我们就把它叫做碰撞（哈希碰撞）。</p><ol><li><p>使用链地址法（使用散列表）来链接拥有相同hash值的数据；</p></li><li><p>使用2次扰动函数（hash函数）来降低哈希冲突的概率，使得数据分布更平均；</p></li><li><p>引入红黑树进一步降低遍历的时间复杂度，使得遍历更快；</p></li></ol><h3 id="如何决定使用-HashMap-还是-TreeMap？"><a href="#如何决定使用-HashMap-还是-TreeMap？" class="headerlink" title="如何决定使用 HashMap 还是 TreeMap？"></a>如何决定使用 HashMap 还是 TreeMap？</h3><p>对于在Map中插入、删除和定位元素这类操作，HashMap是最好的选择。然而，假如你需要对一个有序的key集合进行遍历，TreeMap是更好的选择。基于你的collection的大小，也许向HashMap中添加元素会更快，将map换为TreeMap进行有序key的遍历。</p><h3 id="HashMap的线程不安全"><a href="#HashMap的线程不安全" class="headerlink" title="HashMap的线程不安全"></a>HashMap的线程不安全</h3><ol><li>put的时候导致的多线程数据不一致。</li></ol><p>这个问题比较好想象，比如有两个线程A和B，首先A希望插入一个key-value对到HashMap中，首先计算记录所要落到的桶的索引坐标，然后获取到该桶里面的链表头结点，此时线程A的时间片用完了，而此时线程B被调度得以执行，和线程A一样执行，只不过线程B成功将记录插到了桶里面，假设线程A插入的记录计算出来的桶索引和线程B要插入的记录计算出来的桶索引是一样的，那么当线程B成功插入之后，线程A再次被调度运行时，它依然持有过期的链表头但是它对此一无所知，以至于它认为它应该这样做，如此一来就覆盖了线程B插入的记录，这样线程B插入的记录就凭空消失了，造成了数据不一致的行为。</p><ol start="2"><li>另外一个比较明显的线程不安全的问题是HashMap的get操作可能因为resize而引起死循环（cpu100%）<a href="https://blog.csdn.net/weixin_30326745/article/details/95859533?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164068269016780261974611%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=164068269016780261974611&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-95859533.pc_search_em_sort&utm_term=%E5%A4%9A%E7%BA%BF%E7%A8%8BHashMap%E7%9A%84resize&spm=1018.2226.3001.4187">详细分析</a></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 集合 </tag>
+            
+            <tag> ArrayList </tag>
+            
+            <tag> HashMap </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SpringMVC框架</title>
-      <link href="/2021/12/14/SpringMVC%E6%A1%86%E6%9E%B6/"/>
-      <url>/2021/12/14/SpringMVC%E6%A1%86%E6%9E%B6/</url>
+      <link href="/2021/06/14/SpringMVC%E6%A1%86%E6%9E%B6/"/>
+      <url>/2021/06/14/SpringMVC%E6%A1%86%E6%9E%B6/</url>
       
         <content type="html"><![CDATA[<p>JavaEE体系结构包括四层，从上到下分别是应用层、Web层、业务层、持久层。Struts和SpringMVC是Web层的框架，Spring是业务层的框架，Hibernate和MyBatis是持久层的框架。</p><h1 id="一、什么是SpringMVC？"><a href="#一、什么是SpringMVC？" class="headerlink" title="一、什么是SpringMVC？"></a>一、什么是SpringMVC？</h1><p>Spring MVC是一个基于Java的实现了MVC设计模式的请求驱动类型的轻量级Web框架，通过把Model，View，Controller分离，将web层进行职责解耦，把复杂的web应用分成逻辑清晰的几部分，简化开发，减少出错，方便组内开发人员之间的配合。</p><h1 id="二、SpringMVC的工作流程"><a href="#二、SpringMVC的工作流程" class="headerlink" title="二、SpringMVC的工作流程"></a>二、SpringMVC的工作流程</h1><p><img src="https://img-blog.csdnimg.cn/20200202103741480.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoaXBmZWlfY3Nkbg==,size_16,color_FFFFFF,t_70" alt="SpingMVC工作流程"></p><p><strong>具体流程</strong></p><p>（1）首先浏览器发送请求——&gt;DispatcherServlet，前端控制器收到请求后自己不进行处理，而是委托给其他的解析器进行处理，作为统一访问点，进行全局的流程控制；</p><p>（2）DispatcherServlet——&gt;HandlerMapping，处理器映射器将会把请求映射为HandlerExecutionChain对象（包含一个Handler处理器对象、多个HandlerInterceptor拦截器）对象；</p><p>（3）DispatcherServlet——&gt;HandlerAdapter，处理器适配器将会把处理器包装为适配器，从而支持多种类型的处理器，即适配器设计模式的应用，从而很容易支持很多类型的处理器；</p><p>（4）HandlerAdapter——&gt;调用处理器相应功能处理方法，并返回一个ModelAndView对象（包含模型数据、逻辑视图名）；</p><p>（5）ModelAndView对象（Model部分是业务对象返回的模型数据，View部分为逻辑视图名）——&gt; ViewResolver， 视图解析器将把逻辑视图名解析为具体的View；</p><p>（6）View——&gt;渲染，View会根据传进来的Model模型数据进行渲染，此处的Model实际是一个Map数据结构；</p><p>（7）返回控制权给DispatcherServlet，由DispatcherServlet返回响应给用户，到此一个流程结束。</p><h1 id="三、SpringMVC的优点"><a href="#三、SpringMVC的优点" class="headerlink" title="三、SpringMVC的优点"></a>三、SpringMVC的优点</h1><blockquote><ul><li><p>  可以支持各种视图技术,而不仅仅局限于JSP；</p></li><li><p>  与Spring框架集成（如IoC容器、AOP等）；</p></li><li><p>  清晰的角色分配：前端控制器(dispatcherServlet) , 请求到处理器映射（handlerMapping), 处理器适配器（HandlerAdapter), 视图解析器（ViewResolver）；</p></li><li><p>  支持各种请求资源的映射策略</p></li></ul></blockquote><h1 id="四、SpringMVC常用注解"><a href="#四、SpringMVC常用注解" class="headerlink" title="四、SpringMVC常用注解"></a>四、SpringMVC常用注解</h1><p><strong>@RequestMapping：</strong><br>用于处理请求 url 映射的注解，可用于类或方法上。用于类上，则表示类中的所有响应请求的方法都是以该地址作为父路径。</p><p><strong>@RequestBody：</strong><br>注解实现接收http请求的json数据，将json转换为java对象。</p><p><strong>@ResponseBody：</strong><br>注解实现将conreoller方法返回对象转化为json对象响应给客户。</p><h1 id="五、SpringMVC和Struts2的区别"><a href="#五、SpringMVC和Struts2的区别" class="headerlink" title="五、SpringMVC和Struts2的区别"></a>五、SpringMVC和Struts2的区别</h1><ul><li>  springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。</li></ul><ul><li>  springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，可以设计为单例或多例(建议单例)，struts2是基于类开发，传递参数是通过类的属性，只能设计为多例。</li></ul><ul><li>  Struts采用值栈存储请求和响应的数据，通过OGNL存取数据，springmvc通过参数解析器是将request请求内容解析，并给方法形参赋值，将数据和视图封装成ModelAndView对象，最后又将ModelAndView中的模型数据通过reques域传输到页面。Jsp视图解析器默认使用jstl</li></ul>]]></content>
       
@@ -14,7 +39,9 @@
       
         <tags>
             
-            <tag> -SpringMVC -java </tag>
+            <tag> SpringMVC </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
